@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario Tributario 2026 — Prime Logística y Transporte SAS</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F4F6F8; color: #1a1a1a; padding: 20px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .header { background: #0C447C; border-radius: 12px 12px 0 0; padding: 20px 24px; }
+  .header h1 { font-size: 16px; font-weight: 600; color: #E6F1FB; }
+  .header p { font-size: 12px; color: #85B7EB; margin-top: 4px; }
+  .body { background: #EEF2F6; padding: 20px; border-radius: 0 0 12px 12px; border: 1px solid #d0d9e4; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat { background: #fff; border-radius: 8px; padding: 14px; text-align: center; border: 1px solid #dde3ea; }
+  .stat-num { font-size: 26px; font-weight: 700; }
+  .stat-lbl { font-size: 11px; color: #666; margin-top: 3px; }
+  .note { background: #dbeafe; border-left: 4px solid #1d4ed8; border-radius: 0 8px 8px 0; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: #1e3a5f; line-height: 1.5; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .f-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid #b0bec5; font-size: 12px; cursor: pointer; color: #455a64; background: #fff; transition: all .2s; }
+  .f-btn:hover { background: #e3eaf2; }
+  .f-btn.active { background: #0C447C; color: #fff; border-color: #0C447C; font-weight: 600; }
+  .month-block { margin-bottom: 14px; }
+  .month-label { font-size: 11px; font-weight: 700; color: #546e7a; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; padding: 0 4px; }
+  .ob-row { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 0 8px 8px 0; border: 1px solid #dde3ea; padding: 11px 14px; margin-bottom: 6px; cursor: pointer; transition: background .15s; }
+  .ob-row:hover { background: #f0f4f8; }
+  .ob-row.urgent { border-left: 4px solid #e53935; }
+  .ob-row.soon { border-left: 4px solid #f9a825; }
+  .ob-row.ok { border-left: 4px solid #2e7d32; }
+  .ob-row.done { border-left: 4px solid #90a4ae; opacity: .65; }
+  .ob-date { min-width: 72px; font-size: 13px; font-weight: 700; color: #0C447C; }
+  .ob-desc { flex: 1; font-size: 13px; color: #1a1a1a; line-height: 1.4; }
+  .ob-sub { font-size: 11px; color: #78909c; margin-top: 3px; }
+  .ob-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .badge-urgent { background: #ffebee; color: #b71c1c; }
+  .badge-soon { background: #fff8e1; color: #e65100; }
+  .badge-ok { background: #e8f5e9; color: #1b5e20; }
+  .badge-done { background: #eceff1; color: #546e7a; }
+  .tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 6px; margin-left: 6px; vertical-align: middle; }
+  .tag-simple { background: #dbeafe; color: #1e3a5f; }
+  .tag-ord { background: #fff3e0; color: #7c4b00; }
+  .tag-ret { background: #fce4ec; color: #7b1040; }
+  .footer { text-align: center; font-size: 11px; color: #90a4ae; margin-top: 16px; padding-top: 12px; border-top: 1px solid #dde3ea; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Calendario Tributario 2026 — Prime Logística y Transporte SAS</h1>
+  <p>NIT 901.823.725-1 · Último dígito 5 · Régimen Simple de Tributación · Bogotá D.C.</p>
+</div>
+
+<div class="body">
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="cnt-u" style="color:#e53935">0</div><div class="stat-lbl">Urgentes</div></div>
+    <div class="stat"><div class="stat-num" id="cnt-p" style="color:#f9a825">0</div><div class="stat-lbl">Próximas</div></div>
+    <div class="stat"><div class="stat-num" id="cnt-d" style="color:#2e7d32">0</div><div class="stat-lbl">Cumplidas</div></div>
+  </div>
+
+  <div class="note">
+    <strong>Retención en la fuente en RST:</strong> aplica únicamente sobre salarios (nómina). Haga clic en cualquier obligación para marcarla como cumplida.
+  </div>
+
+  <div class="filters">
+    <button class="f-btn active" onclick="filtrar('todos',this)">Todos</button>
+    <button class="f-btn" onclick="filtrar('simple',this)">Anticipos SIMPLE</button>
+    <button class="f-btn" onclick="filtrar('retencion',this)">Retención nómina</button>
+    <button class="f-btn" onclick="filtrar('renta',this)">Renta 2025</button>
+    <button class="f-btn" onclick="filtrar('exogena',this)">Exógena</button>
+    <button class="f-btn" onclick="filtrar('soportes',this)">Soportes Barco</button>
+  </div>
+
+  <div id="calendario">
+
+    <div class="month-block">
+      <div class="month-label">Febrero 2026</div>
+      <div class="ob-row done" data-tipo="retencion" data-estado="done" data-orig="urgente" onclick="toggle(this)">
+        <div class="ob-date">Feb 23</div>
+        <div class="ob-desc">Retención sobre salarios — enero 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-done">✓ Cumplida</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Marzo 2026</div>
+      <div class="ob-row done" data-tipo="retencion" data-estado="done" data-orig="urgente" onclick="toggle(this)">
+        <div class="ob-date">Mar 16</div>
+        <div class="ob-desc">Retención sobre salarios — febrero 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-done">✓ Cumplida</div>
+      </div>
+      <div class="ob-row done" data-tipo="soportes" data-estado="done" data-orig="urgente" onclick="toggle(this)">
+        <div class="ob-date">Mar 25</div>
+        <div class="ob-desc">Entrega novedades nómina a Barco Consultores<div class="ob-sub">Soportes internos</div></div>
+        <div class="ob-badge badge-done">✓ Cumplida</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Abril 2026</div>
+      <div class="ob-row urgent" data-tipo="soportes" data-estado="urgente" onclick="toggle(this)">
+        <div class="ob-date">Abr 5</div>
+        <div class="ob-desc">Entrega soportes contables a Barco Consultores<div class="ob-sub">Facturas, extractos, documentos tributarios</div></div>
+        <div class="ob-badge badge-urgent">Urgente</div>
+      </div>
+      <div class="ob-row urgent" data-tipo="retencion" data-estado="urgente" onclick="toggle(this)">
+        <div class="ob-date">Abr 20</div>
+        <div class="ob-desc">Retención sobre salarios — marzo 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-urgent">Urgente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Mayo 2026</div>
+      <div class="ob-row soon" data-tipo="soportes" data-estado="proximo" onclick="toggle(this)">
+        <div class="ob-date">May 5</div>
+        <div class="ob-desc">Entrega soportes contables a Barco Consultores<div class="ob-sub">Facturas, extractos, documentos tributarios</div></div>
+        <div class="ob-badge badge-soon">Próximo</div>
+      </div>
+      <div class="ob-row soon" data-tipo="simple" data-estado="proximo" onclick="toggle(this)">
+        <div class="ob-date">May 19</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre ene–feb 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-soon">Próximo</div>
+      </div>
+      <div class="ob-row soon" data-tipo="renta" data-estado="proximo" onclick="toggle(this)">
+        <div class="ob-date">May 19</div>
+        <div class="ob-desc">Renta año gravable 2025 — 1a cuota <span class="tag tag-ord">Form. 110</span><div class="ob-sub">Declaración y pago 1a cuota · régimen ordinario 2025</div></div>
+        <div class="ob-badge badge-soon">Próximo</div>
+      </div>
+      <div class="ob-row soon" data-tipo="retencion" data-estado="proximo" onclick="toggle(this)">
+        <div class="ob-date">May 19</div>
+        <div class="ob-desc">Retención sobre salarios — abril 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-soon">Próximo</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Junio 2026</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Jun 12</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre mar–abr 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Jun 17</div>
+        <div class="ob-desc">Retención sobre salarios — mayo 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Julio 2026</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Jul 13</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre may–jun 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="renta" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Jul 15</div>
+        <div class="ob-desc">Renta año gravable 2025 — 2a cuota <span class="tag tag-ord">Form. 110</span><div class="ob-sub">Pago segunda cuota · régimen ordinario 2025</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Jul 15</div>
+        <div class="ob-desc">Retención sobre salarios — junio 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Agosto 2026</div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Ago 19</div>
+        <div class="ob-desc">Retención sobre salarios — julio 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Septiembre 2026</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Sep 11</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre jul–ago 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Sep 15</div>
+        <div class="ob-desc">Retención sobre salarios — agosto 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Octubre 2026</div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Oct 16</div>
+        <div class="ob-desc">Retención sobre salarios — septiembre 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Noviembre 2026</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Nov 13</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre sep–oct 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Nov 18</div>
+        <div class="ob-desc">Retención sobre salarios — octubre 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Diciembre 2026</div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Dic 15</div>
+        <div class="ob-desc">Retención sobre salarios — noviembre 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">Enero 2027</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Ene 19</div>
+        <div class="ob-desc">Anticipo SIMPLE — bimestre nov–dic 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Renta + IVA + ICA · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="retencion" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Ene 19</div>
+        <div class="ob-desc">Retención sobre salarios — diciembre 2026 <span class="tag tag-ret">Form. 350</span><div class="ob-sub">Solo nómina · NIT terminado en 5</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">2027 — Cierre año gravable 2026</div>
+      <div class="ob-row ok" data-tipo="simple" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Abr 2027</div>
+        <div class="ob-desc">Declaración anual SIMPLE — año gravable 2026 <span class="tag tag-simple">Form. 2593</span><div class="ob-sub">Consolida renta + IVA + ICA · fecha exacta según decreto</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+      <div class="ob-row ok" data-tipo="exogena" data-estado="ok" onclick="toggle(this)">
+        <div class="ob-date">Abr 2027</div>
+        <div class="ob-desc">Información exógena — año gravable 2026<div class="ob-sub">Responsabilidad 14 · fecha según último dígito NIT</div></div>
+        <div class="ob-badge badge-ok">Pendiente</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Barco Consultores — Outsourcing Contable · Generado para Prime Logística y Transporte SAS · 2026</div>
+
+</div>
+</div>
+
+<script>
+function contar(){
+  var u=0,p=0,d=0;
+  document.querySelectorAll('.ob-row').forEach(function(r){
+    if(r.dataset.estado==='done') d++;
+    else if(r.dataset.estado==='urgente') u++;
+    else if(r.dataset.estado==='proximo') p++;
+  });
+  document.getElementById('cnt-u').textContent=u;
+  document.getElementById('cnt-p').textContent=p;
+  document.getElementById('cnt-d').textContent=d;
+}
+function toggle(row){
+  if(!row.dataset.orig) row.dataset.orig=row.dataset.estado;
+  if(row.dataset.estado==='done'){
+    var o=row.dataset.orig;
+    row.dataset.estado=o;
+    row.classList.remove('done');
+    var b=row.querySelector('.ob-badge');
+    if(o==='urgente'){row.classList.add('urgent');b.className='ob-badge badge-urgent';b.textContent='Urgente';}
+    else if(o==='proximo'){row.classList.add('soon');b.className='ob-badge badge-soon';b.textContent='Próximo';}
+    else{row.classList.add('ok');b.className='ob-badge badge-ok';b.textContent='Pendiente';}
+  } else {
+    row.dataset.orig=row.dataset.estado;
+    row.dataset.estado='done';
+    row.classList.remove('urgent','soon','ok');
+    row.classList.add('done');
+    var b=row.querySelector('.ob-badge');
+    b.className='ob-badge badge-done';
+    b.textContent='✓ Cumplida';
+  }
+  contar();
+}
+function filtrar(tipo,btn){
+  document.querySelectorAll('.f-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('.ob-row').forEach(function(r){
+    r.style.display=(tipo==='todos'||r.dataset.tipo===tipo)?'flex':'none';
+  });
+  document.querySelectorAll('.month-block').forEach(function(b){
+    var v=[...b.querySelectorAll('.ob-row')].some(function(r){return r.style.display!=='none'});
+    b.style.display=v?'block':'none';
+  });
+}
+contar();
+</script>
+</body>
+</html>
